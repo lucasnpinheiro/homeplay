@@ -1,0 +1,38 @@
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar bar-header bar-balanced">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-android-more-vertical padding" style="padding-left: 5px; padding-right: 8px;" menu-toggle="left"> </button>
+            </ion-nav-buttons>
+
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left">
+        <ion-header-bar class="bar bar-header bar-balanced">
+            <h1 class="title">Menu</h1>
+        </ion-header-bar>
+        <ion-content class="dark-bg">
+            <div class="text-center padding" style="border: none; border-bottom: 1px solid #fff;">
+                <img src="img/logo.png" style="max-width: 100%; height:100px;" />
+                <div style="color: #fff; font-size: 20px;">Home Play - Automação</div>
+            </div>
+            <ion-list>
+                <ion-item menu-close href="#/app/form" class="item-dark" style="border: none;">
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i> Cadastro de Clientes
+                </ion-item>
+                <ion-item menu-close href="#/app/sincronizar" class="item-dark" style="border: none;">
+                    <i class="fa fa-refresh" aria-hidden="true"></i> Sincronizar Clientes
+                </ion-item>
+            </ion-list>
+            <div class="row" style="position: fixed; bottom: 0px;">
+                <div class="col col-33 text-right"><img style="max-height: 20px;" alt="Leads AppeTtosa" src="img/logo.png" /></div>
+                <div class="col versao_menu" style="color: #ccc;">Versão {{appVersion}}</div>
+            </div>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

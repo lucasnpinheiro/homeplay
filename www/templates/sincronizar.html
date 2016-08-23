@@ -1,0 +1,21 @@
+<ion-view view-title="Sincronização de Leads" cache-view="false">
+    <ion-content padding="true" class="has-header">
+        <button ng-click="sincronizar()" class="button button-block {{buttonClass}}"><i class="{{iconeClass}}" aria-hidden="true"></i> {{iconeText}}</button>
+        <div class="text-center">
+            <div class="positive-bg padding" style="border-radius: 5px;">
+                <h3>Total de registro</h3>
+                <h4>{{dados.total}}</h4>
+            </div>
+            <div class="padding"></div>
+            <div class="calm-bg padding" style="border-radius: 5px;">
+                <h3>Sincronizando</h3>
+                <h4>{{dados.sincronizando}}</h4>
+            </div>
+            <div class="padding"></div>
+            <div class="balanced-bg padding" style="border-radius: 5px;">
+                <h3>Total sincronizados</h3>
+                <h4>{{dados.sincronizados}}</h4>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

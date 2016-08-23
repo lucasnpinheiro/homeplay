@@ -1,0 +1,18 @@
+.sincronizacao_not{
+    background-color: $positive;
+}   
+.sincronizacao_start{
+    background-color: $calm;
+}   
+.sincronizacao_success{
+    background-color: $balanced;
+}
+
+.sincronizacao_not h2, .sincronizacao_not p, .sincronizacao_start h2, .sincronizacao_start p, .sincronizacao_success h2, .sincronizacao_success p{
+    color: $stable;
+}
+
+.title-image {
+    max-height: 35px;
+    margin-top: -2px;
+}
