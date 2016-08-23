@@ -3,7 +3,7 @@ angular.module('starter.controllers', [])
         .controller('AppCtrl', function ($scope) {
 
         })
-        .controller('FormCtrl', function ($scope, $ionicScrollDelegate, ClientesTable, ValidacaoModuloFactory, LoadModuloFactory) {
+        .controller('FormCtrl', function ($scope, $ionicScrollDelegate, ClientesTable, ValidacaoModuloFactory, LoadModuloFactory, CepApiFactory) {
             //ClientesTable.drop();
             ClientesTable.create(function (retorno) {
                 console.log(retorno);
@@ -11,41 +11,41 @@ angular.module('starter.controllers', [])
 
             $scope.formulario = {};
 
-            $scope.campos = function(){
-              $scope.formulario = {
-                  nome: null,
-                  cep: null,
-                  endereco: null,
-                  numero: null,
-                  complemento: null,
-                  bairro: null,
-                  cidade: null,
-                  estado: null,
-                  cpf: null,
-                  rg: null,
-                  telefone: null,
-                  celular: null,
-                  email: null,
-                  atividade: null,
-                  preferencias: {
-                    arquitetura: false,
-                    automacao: false,
-                    construtora: false,
-                    cortinas: false,
-                    decoracao: false,
-                    eletricista: false,
-                    estofados: false,
-                    gesseiro: false,
-                    iluminacao: false,
-                    marcenaria: false,
-                    marmoraria: false,
-                    pedras_decorativas: false,
-                    propagandas: false,
-                    sonorizacao: false,
-                    outros: false
-                  },
-                  outros: null,
-              };
+            $scope.campos = function () {
+                $scope.formulario = {
+                    nome: null,
+                    cep: null,
+                    endereco: null,
+                    numero: null,
+                    complemento: null,
+                    bairro: null,
+                    cidade: null,
+                    estado: null,
+                    cpf: null,
+                    rg: null,
+                    telefone: null,
+                    celular: null,
+                    email: null,
+                    atividade: null,
+                    preferencias: {
+                        arquitetura: false,
+                        automacao: false,
+                        construtora: false,
+                        cortinas: false,
+                        decoracao: false,
+                        eletricista: false,
+                        estofados: false,
+                        gesseiro: false,
+                        iluminacao: false,
+                        marcenaria: false,
+                        marmoraria: false,
+                        pedras_decorativas: false,
+                        propagandas: false,
+                        sonorizacao: false,
+                        outros: false
+                    },
+                    outros: null
+                };
             }
 
             $scope.campos();
@@ -61,6 +61,21 @@ angular.module('starter.controllers', [])
             };
 
             $scope.msg = '';
+
+            $scope.buscaCep = function (cep) {
+                CepApiFactory.busca(cep, function (ret) {
+                    if (ValidacaoModuloFactory.isOk(ret.status)) {
+                        if (ret.data.result.status === 'OK') {
+                            $scope.formulario.cep = cep;
+                            $scope.formulario.endereco = ret.data.result.Cep.logradouro;
+                            $scope.formulario.bairro = ret.data.result.Cep.bairro;
+                            $scope.formulario.cidade = ret.data.result.Cep.cidade;
+                            $scope.formulario.estado = ret.data.result.Cep.uf;
+                        }
+                    }
+                });
+            }
+
             $scope.salvar = function () {
                 LoadModuloFactory.show();
                 $scope.iconeSave = 'ion-checkmark-circled';
@@ -77,10 +92,10 @@ angular.module('starter.controllers', [])
                 var inst = $scope.formulario;
                 var arr = [];
 
-                angular.forEach($scope.formulario.preferencias, function(v, k){
-                  if(v === true){
-                    arr.push(k);
-                  }
+                angular.forEach($scope.formulario.preferencias, function (v, k) {
+                    if (v === true) {
+                        arr.push(k);
+                    }
                 });
 
                 $scope.msg = 'Aguarde salvando dados.';
@@ -134,15 +149,15 @@ angular.module('starter.controllers', [])
                 ClientesTable.all({}, function (retorno) {
                     if (retorno !== null) {
                         angular.forEach(retorno, function (value, key) {
-                          var _value = {};
-                          angular.forEach(value, function(v,k){
-                            if(k !== 'id'){
-                              if(v !== null || v !==''){
-                                _value[k] = v;
-                              }
-                            }
+                            var _value = {};
+                            angular.forEach(value, function (v, k) {
+                                if (k !== 'id') {
+                                    if (v !== null || v !== '') {
+                                        _value[k] = v;
+                                    }
+                                }
 
-                          });
+                            });
                             $scope.dados.sincronizando++;
                             ClientesApiFactory.add(_value, function (retorno) {
                                 console.log(retorno);

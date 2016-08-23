@@ -3,6 +3,8 @@ angular.module('starter')
             function (Config, $http) {
 
                 var services = {};
+                
+                services.url = Config.url + Config.api;
 
                 services.header = function () {
                     delete $http.defaults.headers.common['Access-Control-Allow-Origin'];
@@ -15,7 +17,7 @@ angular.module('starter')
                 services.post = function (url, options, retorno) {
                     services.header();
                     services.debug(options);
-                    $http.post(Config.url + Config.api + url, options).then(
+                    $http.post(services.url + url, options).then(
                             function (response) {
                                 services.debug(response);
                                 retorno(response);
@@ -29,7 +31,7 @@ angular.module('starter')
                 services.put = function (url, options, retorno) {
                     services.header();
                     services.debug(options);
-                    $http.put(Config.url + Config.api + url, options).then(
+                    $http.put(services.url + url, options).then(
                             function (response) {
                                 services.debug(response);
                                 retorno(response);
@@ -47,7 +49,7 @@ angular.module('starter')
                         limit: 1000
                     }, options);
                     services.debug(options);
-                    $http.get(Config.url + Config.api + url, {params: options
+                    $http.get(services.url + url, {params: options
                     }).then(function (response) {
                         services.debug(response);
                         retorno(response);
@@ -60,7 +62,7 @@ angular.module('starter')
                 services.delete = function (url, options, retorno) {
                     services.header();
                     services.debug(options);
-                    $http.delete(Config.url + Config.api + url, options).then(
+                    $http.delete(services.url + url, options).then(
                             function (response) {
                                 services.debug(response);
                                 retorno(response);

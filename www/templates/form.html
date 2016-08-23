@@ -8,7 +8,7 @@
             </label>
             <label class="item item-input item-stacked-label " >
                 <span class="input-label">CEP</span>
-                <input type="number" placeholder="CEP" ng-model="formulario.cep"  name="cep">
+                <input type="number" placeholder="CEP" ng-model="formulario.cep" ng-blur="buscaCep(formulario.cep)"  name="cep">
             </label>
             <label class="item item-input item-stacked-label " >
                 <span class="input-label">Endereço</span>
@@ -85,7 +85,7 @@
             </label>
             <label class="item item-input item-stacked-label " >
                 <span class="input-label">Atividade</span>
-                <input type="email" placeholder="Atividade" ng-model="formulario.atividade"  name="atividade">
+                <input type="text" placeholder="Atividade" ng-model="formulario.atividade"  name="atividade">
             </label>
             <div class="row">
               <div class="col">

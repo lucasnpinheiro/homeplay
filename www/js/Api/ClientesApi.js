@@ -1,10 +1,11 @@
 angular.module('starter')
-        .factory('ClientesApiFactory', ['RequestModuloFactory',
-            function (RequestModuloFactory) {
+        .factory('ClientesApiFactory', ['RequestModuloFactory', 'Config',
+            function (RequestModuloFactory, Config) {
 
                 var services = {};
 
                 services.add = function (options, retorno) {
+                    RequestModuloFactory.url = Config.url + Config.api;
                     options = angular.merge({
                         id: '',
                         nome: '',
