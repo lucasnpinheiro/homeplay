@@ -87,71 +87,85 @@
                 <span class="input-label">Atividade</span>
                 <input type="text" placeholder="Atividade" ng-model="formulario.atividade"  name="atividade">
             </label>
-            <div class="row">
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.arquitetura" ng-model="formulario.preferencias.arquitetura">Arquitetura</ion-checkbox>
-              </div>
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.automacao" ng-model="formulario.preferencias.automacao">Automação</ion-checkbox>
-              </div>
+            <div class="list">
+                <div class="item item-divider">
+                    Qual sua preferência na feira:
+                </div>
+                <div class="item">
+                    <div class="row" style="margin: 0px; padding: 0px;">
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.arquitetura" ng-model="formulario.preferencias.arquitetura">Arquitetura</ion-checkbox>
+                        </div>
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.automacao" ng-model="formulario.preferencias.automacao">Automação</ion-checkbox>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 0px; padding: 0px;">
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.construtora" ng-model="formulario.preferencias.construtora">Construtora</ion-checkbox>
+                        </div>
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.cortinas" ng-model="formulario.preferencias.cortinas">Cortinas</ion-checkbox>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 0px; padding: 0px;">
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.decoracao" ng-model="formulario.preferencias.decoracao">Decoração</ion-checkbox>
+                        </div>
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.eletricista" ng-model="formulario.preferencias.eletricista">Eletrecista</ion-checkbox>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 0px; padding: 0px;">
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.estofados" ng-model="formulario.preferencias.estofados">Estofados</ion-checkbox>
+                        </div>
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.gesseiro" ng-model="formulario.preferencias.gesseiro">Gesseiro</ion-checkbox>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 0px; padding: 0px;">
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.iluminacao" ng-model="formulario.preferencias.iluminacao">Iluminação</ion-checkbox>
+                        </div>
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.marcenaria" ng-model="formulario.preferencias.marcenaria">Marcenaria</ion-checkbox>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 0px; padding: 0px;">
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.marmoraria" ng-model="formulario.preferencias.marmoraria">Marmoraria</ion-checkbox>
+                        </div>
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.pedras_decorativas" ng-model="formulario.preferencias.pedras_decorativas">Pedras Decorativas</ion-checkbox>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 0px; padding: 0px;">
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.propagandas" ng-model="formulario.preferencias.propagandas">Propagandas</ion-checkbox>
+                        </div>
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.sonorizacao" ng-model="formulario.preferencias.sonorizacao">Sonorização</ion-checkbox>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 0px; padding: 0px;">
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.luminarias" ng-model="formulario.preferencias.luminarias">Luminárias</ion-checkbox>
+                        </div>
+                        <div class="col-50">
+                            <ion-checkbox style="font-size: 10px;" name="preferencias.papel_parede" ng-model="formulario.preferencias.papel_parede">Papel de Parede</ion-checkbox>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 0px; padding: 0px;">
+                        <ion-checkbox style="font-size: 10px; width: 100%;" name="preferencias.outros" ng-model="formulario.preferencias.outros">Outros</ion-checkbox>
+                    </div>
+                    <label class="item item-input item-stacked-label " >
+                        <span class="input-label">Informe outras preferência</span>
+                        <textarea row="8" placeholder="Outros" ng-model="formulario.outros" name="Informe outras preferência"></textarea>
+                    </label>    
+                </div>
             </div>
-            <div class="row">
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.construtora" ng-model="formulario.preferencias.construtora">Construtora</ion-checkbox>
-              </div>
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.cortinas" ng-model="formulario.preferencias.cortinas">Cortinas</ion-checkbox>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.decoracao" ng-model="formulario.preferencias.decoracao">Decoração</ion-checkbox>
-              </div>
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.eletricista" ng-model="formulario.preferencias.eletricista">Eletrecista</ion-checkbox>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.estofados" ng-model="formulario.preferencias.estofados">Estofados</ion-checkbox>
-              </div>
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.gesseiro" ng-model="formulario.preferencias.gesseiro">Gesseiro</ion-checkbox>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.iluminacao" ng-model="formulario.preferencias.iluminacao">Iluminação</ion-checkbox>
-              </div>
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.marcenaria" ng-model="formulario.preferencias.marcenaria">Marcenaria</ion-checkbox>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.marmoraria" ng-model="formulario.preferencias.marmoraria">Marmoraria</ion-checkbox>
-              </div>
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.pedras_decorativas" ng-model="formulario.preferencias.pedras_decorativas">Pedras Decorativas</ion-checkbox>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.propagandas" ng-model="formulario.preferencias.propagandas">Propagandas</ion-checkbox>
-              </div>
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.sonorizacao" ng-model="formulario.preferencias.sonorizacao">Sonorização</ion-checkbox>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <ion-checkbox style="font-size: 11px;" name="preferencias.outros" ng-model="formulario.preferencias.outros">Outros</ion-checkbox>
-              </div>
-            </div>
-            <label class="item item-input item-stacked-label " >
-                <span class="input-label">Outros</span>
-                <textarea row="8" placeholder="Outros" ng-model="formulario.outros" name="outros"></textarea>
-            </label>
+
 
 
             <button type="submit" class="button button-balanced button-block icon-left {{iconeSave}}">Salvar</button>

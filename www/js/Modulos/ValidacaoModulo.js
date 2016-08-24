@@ -70,28 +70,67 @@ angular.module('starter')
                         return !!val;
                     };
 
-                    services.empty = function (val) {
-                        if(val === null){
-                          return true;
-                        } else if(val === ''){
-                          return true;
-                        } else if(val === 'undefined'){
-                          return true;
-                        } else if(val === undefined){
-                          return true;
-                        } else {
-                          return false;
-                        }
-                    };
+                    /*services.empty = function (val) {
+                     if(val === null){
+                     return true;
+                     } else if(val === ''){
+                     return true;
+                     } else if(val === 'undefined'){
+                     return true;
+                     } else if(val === undefined){
+                     return true;
+                     } else {
+                     return false;
+                     }
+                     };*/
 
-                    services.alert = function (msg) {
+                    services.alert = function (msg, title, callback) {
                         var alertPopup = $ionicPopup.alert({
-                            title: 'Aviso!',
+                            title: title || 'Aviso!',
                             template: '<div class="text-center">' + msg + '</div>'
                         });
 
                         alertPopup.then(function (res) {
+                            if (typeof callback === "function") {
+                                callback(res);
+                            }
+                        });
+                    };
 
+                    services.confirm = function (msg, options, callback) {
+                        options = angular.merge({
+                            title: 'Aviso!',
+                            btOk: {
+                                text: '<b>Salvar</b>',
+                                type: 'button-positive'
+                            },
+                            btCancel: {
+                                text: '<b>Cancelar</b>',
+                                type: 'button-assertive'
+                            }
+                        }, options);
+                        var myPopup = $ionicPopup.show({
+                            template: '<div class="text-center">' + msg + '</div>',
+                            title: options.title,
+                            buttons: [
+                                {
+                                    text: options.btCancel.text,
+                                    type: options.btCancel.type,
+                                    onTap: function (e) {
+                                        callback(e, false);
+                                    }
+                                },
+                                {
+                                    text: options.btOk.text,
+                                    type: options.btOk.type,
+                                    onTap: function (e) {
+                                        callback(e, true);
+                                    }
+                                }
+                            ]
+                        });
+
+                        myPopup.then(function (res) {
                         });
                     };
 

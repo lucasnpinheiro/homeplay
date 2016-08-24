@@ -42,6 +42,8 @@ angular.module('starter.controllers', [])
                         pedras_decorativas: false,
                         propagandas: false,
                         sonorizacao: false,
+                        luminarias: false,
+                        papel_parede: false,
                         outros: false
                     },
                     outros: null
@@ -77,43 +79,47 @@ angular.module('starter.controllers', [])
             }
 
             $scope.salvar = function () {
-                LoadModuloFactory.show();
                 $scope.iconeSave = 'ion-checkmark-circled';
                 $scope.msg = '';
 
                 if (!ValidacaoModuloFactory.isNotNull($scope.formulario.nome)) {
-                    LoadModuloFactory.hide();
                     ValidacaoModuloFactory.alert('Informe um nome.');
                     $ionicScrollDelegate.scrollTop();
                     $scope.iconeSave = 'ion-checkmark';
                     return;
                 }
 
-                var inst = $scope.formulario;
-                var arr = [];
+                ValidacaoModuloFactory.confirm('Deseja realmente salvar estes dados.', {}, function (r, success) {
+                    LoadModuloFactory.show();
+                    if (success) {
+                        var inst = $scope.formulario;
+                        var arr = [];
 
-                angular.forEach($scope.formulario.preferencias, function (v, k) {
-                    if (v === true) {
-                        arr.push(k);
-                    }
-                });
+                        angular.forEach($scope.formulario.preferencias, function (v, k) {
+                            if (v === true) {
+                                arr.push(k);
+                            }
+                        });
 
-                $scope.msg = 'Aguarde salvando dados.';
-                inst.preferencias = arr.join(',');
-                console.log(inst);
-                ClientesTable.insert(inst, function (retorno) {
-                    $scope.msg = '';
-                    if (!retorno === true) {
-                        $scope.msg = 'Não foi possivel salvar o registro, verifique os dados.';
+                        $scope.msg = 'Aguarde salvando dados.';
+                        inst.preferencias = arr.join(',');
+                        console.log(inst);
+                        ClientesTable.insert(inst, function (retorno) {
+                            $scope.msg = '';
+                            if (!retorno === true) {
+                                $scope.msg = 'Não foi possivel salvar o registro, verifique os dados.';
+                            } else {
+                                $scope.campos();
+                                $scope.msg = 'Registro salvo com sucesso.';
+                            }
+                            $ionicScrollDelegate.scrollTop();
+                            $scope.iconeSave = 'ion-checkmark';
+                            LoadModuloFactory.hide();
+                        });
                     } else {
-                        $scope.campos();
-                        $scope.msg = 'Registro salvo com sucesso.';
+                        LoadModuloFactory.hide();
                     }
-                    $ionicScrollDelegate.scrollTop();
-                    $scope.iconeSave = 'ion-checkmark';
-                    LoadModuloFactory.hide();
                 });
-
             };
         })
 

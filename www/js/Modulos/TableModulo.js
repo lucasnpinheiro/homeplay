@@ -65,15 +65,15 @@ angular.module('starter')
 
                 services.save = function (options, retorno, forceCreate) {
                     if (forceCreate === true) {
-                        services.insert(services.table, options, retorno);
+                        services.insert(services.options, retorno);
                     } else {
                         if (options.id !== null) {
-                            services.update(services.table, options, options.id, retorno);
+                            services.update(services.options, options.id, retorno);
                         } else {
                             if (options.id === undefined || options.id === 'undefined' || options.id === '' || options.id === null) {
                                 delete options.id;
                             }
-                            services.insert(services.table, options, retorno);
+                            services.insert(services.options, retorno);
                         }
                     }
                 };
@@ -81,13 +81,15 @@ angular.module('starter')
                 services.insert = function (options, retorno) {
                     var key = [];
                     var value = [];
+                    var _value = [];
                     angular.forEach(options, function (v, k) {
                         if (!ValidacaoModuloFactory.empty(v) || ValidacaoModuloFactory.is_numeric(v)) {
                             key.push(k);
-                            value.push('"' + ValidacaoModuloFactory.trim(v) + '"');
+                            value.push(ValidacaoModuloFactory.trim(v));
+                            _value.push('?');
                         }
                     });
-                    var query = "INSERT INTO " + services.table + " (" + key.join(', ') + ") VALUES (" + value.join(', ') + ");";
+                    var query = "INSERT INTO " + services.table + " (" + key.join(', ') + ") VALUES (" + _value.join(', ') + ");";
                     services.query(query, function (res) {
                         if (res !== null) {
                             options.id = res.insertId;
@@ -95,37 +97,41 @@ angular.module('starter')
                         } else {
                             retorno(null);
                         }
-                    });
+                    }, value);
 
                 };
 
                 services.replace = function (options, retorno) {
                     var key = [];
                     var value = [];
+                    var _value = [];
                     angular.forEach(options, function (v, k) {
                         if (!ValidacaoModuloFactory.empty(v) || ValidacaoModuloFactory.is_numeric(v)) {
                             key.push(k);
-                            value.push('"' + ValidacaoModuloFactory.trim(v) + '"');
+                            value.push(ValidacaoModuloFactory.trim(v));
+                            _value.push('?');
                         }
                     });
-                    var query = "INSERT OR REPLACE INTO " + services.table + " (" + key.join(', ') + ") VALUES (" + value.join(', ') + ");";
+                    var query = "INSERT OR REPLACE INTO " + services.table + " (" + key.join(', ') + ") VALUES (" + _value.join(', ') + ");";
                     services.query(query, function (res) {
                         if (res !== null) {
                             retorno(options);
                         } else {
                             retorno(null);
                         }
-                    });
-
+                    }, value);
                 };
 
                 services.update = function (options, id, retorno) {
                     var key = [];
+                    var value = [];
                     angular.forEach(options, function (v, k) {
                         if (!ValidacaoModuloFactory.empty(v) || ValidacaoModuloFactory.is_numeric(v)) {
-                            key.push(k + '="' + ValidacaoModuloFactory.trim(v) + '"');
+                            key.push(k + '=?');
+                            value.push(ValidacaoModuloFactory.trim(v));
                         } else {
-                            key.push(k + '=null');
+                            key.push(k + '=?');
+                            value.push(null);
                         }
                     });
                     var query = "UPDATE " + services.table + " SET " + key.join(', ') + " WHERE id = '" + id + "'";
@@ -135,7 +141,7 @@ angular.module('starter')
                         } else {
                             retorno(null);
                         }
-                    });
+                    }, value);
 
                 };
 
@@ -168,7 +174,7 @@ angular.module('starter')
                         join: null
                     }, options);
                     conditions.limit = 1;
-                    services.all(services.table, conditions, function (r) {
+                    services.all(conditions, function (r) {
                         if (r === null) {
                             retorno(null);
                         } else {
@@ -191,7 +197,7 @@ angular.module('starter')
                     query.push("SELECT");
                     query.push(conditions.from);
                     query.push('FROM');
-                    query.push(services.table);
+                    query.push(table);
                     if (!ValidacaoModuloFactory.empty(conditions.alias)) {
                         query.push("AS " + conditions.alias);
                     }
@@ -236,12 +242,12 @@ angular.module('starter')
 
                 services.deleteAll = function (options, retorno) {
                     var conditions = angular.merge({
-                        where: null,
+                        where: null
                     }, options);
                     var query = [];
                     query.push("DELETE");
                     query.push('FROM');
-                    query.push(services.table);
+                    query.push(table);
                     if (!ValidacaoModuloFactory.empty(conditions.where)) {
                         query.push('WHERE');
                         query.push(conditions.where);
@@ -268,7 +274,7 @@ angular.module('starter')
 
 
                 services.count = function (retorno) {
-                    var query = "SELECT COALESCE(COUNT(*), 0) as total FROM " + services.table;
+                    var query = "SELECT COALESCE(COUNT(*), 0) as total FROM " + table;
                     services.query(query, function (res) {
                         if (res !== null) {
                             var obj = res.rows.item(0);
@@ -290,15 +296,21 @@ angular.module('starter')
                     });
                 };
 
-                services.query = function (query, retorno) {
+                services.query = function (query, retorno, params) {
+                    params = params || [];
                     db.transaction(function (transaction) {
-                        transaction.executeSql(query, [],
+                        transaction.executeSql(query, params,
                                 function (tx, result) {
-                                    services.debug(tx);
+                                    services.debug('SUCESSO DO SQL');
                                     services.debug(query);
+                                    services.debug(tx);
+                                    services.debug(params);
+                                    services.debug(result);
                                     retorno(result);
                                 },
                                 function (error) {
+                                    services.debug('ERRO DO SQL');
+                                    services.debug(params);
                                     services.debug(query);
                                     services.debug(error);
                                     retorno(null);
