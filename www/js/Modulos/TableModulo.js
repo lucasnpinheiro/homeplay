@@ -197,7 +197,7 @@ angular.module('starter')
                     query.push("SELECT");
                     query.push(conditions.from);
                     query.push('FROM');
-                    query.push(table);
+                    query.push(services.table);
                     if (!ValidacaoModuloFactory.empty(conditions.alias)) {
                         query.push("AS " + conditions.alias);
                     }
@@ -247,7 +247,7 @@ angular.module('starter')
                     var query = [];
                     query.push("DELETE");
                     query.push('FROM');
-                    query.push(table);
+                    query.push(services.table);
                     if (!ValidacaoModuloFactory.empty(conditions.where)) {
                         query.push('WHERE');
                         query.push(conditions.where);
